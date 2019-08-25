@@ -10,7 +10,7 @@ int main(void)
     int scanf_count;
     float number_1, number_2;
     scanf_count = input_two_floats(&number_1, &number_2);
-    while (scanf_count == 2)
+    while (scanf_count == 1)
     {
         printf("%f\n", (number_1-number_2)/(number_1*number_2));
         scanf_count = input_two_floats(&number_1, &number_2);
