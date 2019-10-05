@@ -11,6 +11,8 @@ int main(void)
     ic();
     ic();
     br();
+    getchar();
+    getchar();
     return 0;
 }
 void br(void)
