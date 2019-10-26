@@ -13,8 +13,7 @@ int main(void)
 }
 int fib(int n)
 {
-    if(
-        n <= 2)
+    if(n <= 2)
     {
         return 1;
     }
