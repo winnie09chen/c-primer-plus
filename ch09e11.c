@@ -1,34 +1,24 @@
 #include <stdio.h>
-
-void fib(int n);
-
+int fib(int n);
 int main(void)
 {
-    int n;
-    printf("Print a number:\n");
+    int n, m, a;
+    printf("Input a number:\n");
     scanf("%d", &n);
-    fib(n);
+    a = fib(n);
+    printf("%d", a);
     getchar();
     getchar();
     return 0;
 }
-
-void fib(int n) 
+int fib(int n)
 {
-    int a = 1, b = 1, temp = 0;
-    if (n >= 1)
+    if(n <= 2)
     {
-        printf("%d", a);
+        return 1;
     }
-    if (n >= 2)
-    {
-        printf(", %d", b);
-    }
-    for (int i = 2; i < n; i++) 
-    {
-        temp = a;
-        a = b;
-        b = temp + a;
-        printf(", %d", b);
+    else
+    { 
+        return fib(n - 1) + fib(n - 2);
     }
 }
