@@ -2,13 +2,13 @@
 int main(void)
 {
     int scanf_count;
-    float vegetable_yang_pound = 2.05, vegetable_lettuce_pound = 1.15, vegetable_corrot_pound = 1.09;
-    float yang_pound = 0, lettuce_pound = 0, corrot_pound = 0, pound = 0;
+    float vegetable_bean_pound = 2.05, vegetable_lettuce_pound = 1.15, vegetable_corrot_pound = 1.09;
+    float bean_pound = 0, lettuce_pound = 0, corrot_pound = 0, pound = 0;
     float money = 0, money_cargo_fee = 0, money_discount = 0;
     char a = 'a';
     while (a != 'q')
     {
-        printf("a) yang\n");
+        printf("a) bean\n");
         printf("b) lettuce\n");
         printf("c) corrot\n");
         printf("q) check out\n");
@@ -18,8 +18,8 @@ int main(void)
         switch (a)
         {
         case 'a':
-            printf("Input your yang pound:\n");
-            scanf("%f", &yang_pound);
+            printf("Input your bean pound:\n");
+            scanf("%f", &bean_pound);
 
             getchar();
             break;
@@ -37,8 +37,8 @@ int main(void)
             break;
         }
     }
-    pound = yang_pound + lettuce_pound + corrot_pound;
-    money = yang_pound * vegetable_yang_pound + lettuce_pound * vegetable_lettuce_pound + corrot_pound * vegetable_corrot_pound;
+    pound = bean_pound + lettuce_pound + corrot_pound;
+    money = bean_pound * vegetable_bean_pound + lettuce_pound * vegetable_lettuce_pound + corrot_pound * vegetable_corrot_pound;
     if (money >= 100)
     {
         money_discount = money * 0.05;
