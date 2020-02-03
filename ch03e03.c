@@ -2,9 +2,13 @@
 
 int main(void)
 {
-    printf("\a");
-    printf("Startled by the sudden sound, Sally shoutedk,\n");
-    printf("\"By the Great Pumpkin, what was that\"\n");
-
+    for(int a = 0, b = 50; a <= b; ++a)
+    {
+        printf("\a");
+    }
+    printf("Startled by the sudden sound, Sally shouted,\n");
+    printf("By the Great Pumpkin, what was that\"\n");
+    getchar();
+    getchar();
     return 0;
 }
