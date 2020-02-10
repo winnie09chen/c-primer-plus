@@ -1,29 +1,19 @@
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include "mylib.h"
 #define STRLEN 100
-delete_space(char * st);
 int main(void)
 {
     char words[STRLEN];
+    char letter;
     puts("Enter a sentence:");
     fgets(words, STRLEN, stdin);
-    delete_space(words);
+    puts("Enter a letter to delete:");
+    scanf("%c", &letter);
+    delete_letter(words, letter);
     puts(words);
     getchar();
     getchar();
     return 0;
-}
-delete_space(char * st)
-{
-    int u = 0, i = 0;
-    for(; st[u] != '\0'; u++)
-    {
-        if(isgraph(st[u]))
-        {
-            st[i]= st[u];
-            i++;
-        }   
-    }
-    st[i] = '\0';
 }

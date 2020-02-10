@@ -4,5 +4,8 @@
         "**/*.ilk": true,
         "**/*.obj": true,
         "**/*.pdb": true
+    },
+    "files.associations": {
+        "ctype.h": "c"
     }
 }
