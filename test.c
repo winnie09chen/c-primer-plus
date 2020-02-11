@@ -7,5 +7,6 @@ int main(int argc, char* argv[])
     {
         printf("%d: %p, %s\n", i, *(argv+i), argv[i]);
     }
+    getchar();
     return 0;
 }
