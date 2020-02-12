@@ -4,6 +4,7 @@
 #include <string.h>
 #define STRLEN 100
 char *next_word(char *st);
+int count_word(char * st);
 int main(void)
 {
     char *word_ptr;
@@ -16,6 +17,11 @@ int main(void)
     words_ptr = (char **)malloc(word_count * sizeof(char *));
     puts("Enter a sentence:");
     fgets(words, STRLEN, stdin);
+    if(count_word(words) < word_count)
+    {
+        puts("You enter wrong number of words");
+        return -1;
+    }
     word_ptr = words;
     for(int i = 0; i < word_count; i++)
     {
@@ -51,4 +57,23 @@ char * next_word(char *st)
     }
     *st = '\0';
     return p;
+}
+
+int count_word(char * st)
+{
+    int isword = 0;
+    int word = 0;
+    for(int i = 0; i < strlen(st); i++)
+    {
+        if(!isspace(st[i]) && isword == 0)
+        {
+            isword = 1;
+            ++word;
+        }
+        else if(isspace(st[i]) && isword == 1)
+        {
+            isword = 0;
+        }
+    }
+    return word;
 }
