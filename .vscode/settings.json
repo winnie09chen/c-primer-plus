@@ -6,6 +6,7 @@
         "**/*.pdb": true
     },
     "files.associations": {
-        "ctype.h": "c"
+        "ctype.h": "c",
+        "stdio.h": "c"
     }
 }

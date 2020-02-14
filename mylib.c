@@ -44,3 +44,20 @@ void delete_letter(char * st, char letter)
     }
     st[i] = '\0';
 }
+
+void bubble_sort(int *array, int size)
+{
+    int tmp;
+    for (int i = size; i > 0; i--)
+    {
+        for (int j = 1; j < i; j++)
+        {
+            if (array[j-1] > array[j])
+            {
+                tmp = array[j-1];
+                array[j-1] = array[j];
+                array[j] = tmp;
+            }
+        }
+    }
+}
