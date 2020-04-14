@@ -4,9 +4,9 @@
 int main(int argc, char * argv[])
 {
     FILE * ptr = NULL;
-    char ch[SIZE];
-    int row = 0, paper = 0, input_paper, read_paper = 0;
-
+    char ch[SIZE], file[20];
+    char choose, quit;
+    int row = 0, paper = 0, input_paper;
     if(argc < 2)
     {
         fprintf(stderr, "No file to open.\n");
@@ -19,6 +19,8 @@ int main(int argc, char * argv[])
         exit(EXIT_FAILURE);
     }
 
+    b: row = 0;
+    paper = 0;
     while(fgets(ch, SIZE, ptr) != NULL)
     {
         if(row % 10 == 0)
@@ -28,35 +30,64 @@ int main(int argc, char * argv[])
         ++row;
     }
 
-    printf("Which paper do you want to open(1 - %d): ", paper);
-    scanf("%d", &input_paper);
+    printf("Do you want to quit: ");
+    scanf("%c", &quit);
+    getchar();
 
-    rewind(ptr);
-    row = 0;
-    input_paper -= 1;
-
-    while(read_paper != input_paper && fgets(ch, SIZE, ptr) != NULL)
+    while(quit == 'n')
     {
-        if(row % 10 == 0)
+        printf("Which mode do you want open the file\na) choose the page\nb) another file\n");
+        scanf("%c", &choose);
+        getchar();
+
+        if(choose == 'a')
         {
-            ++read_paper; 
+            printf("Which paper do you want to open(1 - %d): ", paper);
+            scanf("%d", &input_paper);
+            getchar();
+
+            rewind(ptr);
+            row = 0;
+            input_paper -= 1;
+
+            for(int i = 0; i < input_paper * 10; i++)
+            {
+                if(fgets(ch, SIZE, ptr) == NULL)
+                {
+                    break;
+                }
+                row++;
+            }
+
+            row = 0;
+
+            while(fgets(ch, SIZE, ptr) != NULL)
+            {
+                if(row == 10)
+                {
+                    goto a;
+                }
+                    fputs(ch, stdout);
+                ++row;
+            }
         }
-        ++row;
-    }
 
-    row = 0;
-
-    while(fgets(ch, SIZE, ptr) != NULL)
-    {
-        if(row == 10)
+        if(choose == 'b')
         {
-            goto a;
+            printf("Which file do you want to open: ");
+            gets_s(file, 20);
+            if((ptr = fopen(file, "r")) == NULL)
+            {
+                fprintf(stderr, "Can't open the file.\n");
+                exit(EXIT_FAILURE);
+            }
+            goto b;
         }
-        fputs(ch, stdout);
-        ++row;
+        a: printf("Do you want to quit: ");
+        scanf("%c", &quit);
+        getchar();
     }
-
-    a: getchar();
+    getchar();
     getchar();
     return 0;
 }
