@@ -26,4 +26,6 @@ void Traverse(const Stack * plist, void(*pfun)(Item item, Node * pnode));
 
 bool StackIsEmpty(const Stack * pstack);
 
+
+
 #endif
