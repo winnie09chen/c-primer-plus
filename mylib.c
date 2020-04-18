@@ -61,3 +61,20 @@ void bubble_sort(int *array, int size)
         }
     }
 }
+
+int two_to_ten(char number[])
+{
+    int two_base_number[8];
+    int total = 0, turn_number = 1;
+    for(int i = 0; i < 8; i++)
+    {
+        two_base_number[8 - i - 1] = (int)number[i] - 48;
+    }
+
+    for(int i = 0; i < 8; i++)
+    {
+        total += two_base_number[i] * turn_number;
+        turn_number *= 2;
+    }
+    return total;
+}

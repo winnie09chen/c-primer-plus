@@ -9,4 +9,6 @@ void delete_letter(char * st, char letter);
 
 void bubble_sort(int *arrray, int size);
 
+int two_to_ten(char number[]);
+
 #endif
