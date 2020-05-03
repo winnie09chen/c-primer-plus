@@ -38,6 +38,9 @@ int main(void)
         puts("Enter next movie title (Empty line to stop):");
     }
     DeleteItemTail(&movies, &temp);
+
+
+
     if(ListIsEmpty(&movies))
     {
         printf("No data entered.\n");
@@ -49,6 +52,15 @@ int main(void)
         ReverseTraverse(&movies, showmovies);
     }
     printf("You entered %d movies.\n", ListItemCount(&movies));
+
+    movies.tail->next = movies.tail->prev;
+
+    if(IsCycle(&movies))
+    {
+        printf("y");
+    }
+
+    movies.tail->next = NULL;
 
     EmptyTheList(&movies);
     printf("Bye!\n");

@@ -167,3 +167,24 @@ bool DeleteItemTail(List * plist, Item * pitem)
 {
     return DeleteItem(plist, pitem, false);
 }
+
+bool IsCycle(List * plist)
+{
+    Node * p1;
+    Node * p2;
+    p1 = plist->head;
+    p2 = plist->head;
+
+    while(p2 != NULL && p2->next != NULL)
+    {
+        p1 = p1->next;
+        p2 = p2->next->next;
+
+        if(p1 == p2)
+        {
+            return true;
+        }
+    }
+
+    return false;
+}

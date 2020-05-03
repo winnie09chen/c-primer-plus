@@ -7,4 +7,6 @@ void DowdAdJust(int array[], int parentIndex, int length);
 
 void BuildHeap(int array[], int length);
 
+void PrintHeap(int array[], int length, int space, int location);
+
 #endif

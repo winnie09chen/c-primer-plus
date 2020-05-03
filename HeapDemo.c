@@ -11,6 +11,10 @@ int main(void)
     {
         printf("%d ", array[i]);
     }
+    printf("\n");
+
+    PrintHeap(array, SIZE, 0, 0);
+
     getchar();
     return 0;
 }

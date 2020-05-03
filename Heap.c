@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "Heap.h"
 
 void UpAdJust(int array[], int length)
@@ -46,4 +47,21 @@ void BuildHeap(int array[], int length)
     {
         DownAdJust(array, i, length);
     }
+}
+
+void PrintHeap(int array[], int length, int space, int location)
+{
+    if(location >= length)
+    {
+        return;
+    }
+    for(int i = 0; i < space; i++)
+    {
+        printf(" ");
+    }
+    printf("%d", array[location]);
+    printf("\n");
+
+    PrintHeap(array, length, space + 4, location * 2 + 1);
+    PrintHeap(array, length, space + 4, location * 2 + 2);
 }

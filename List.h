@@ -47,4 +47,6 @@ bool DeleteItemHead(List * plist, Item * item);
 
 bool DeleteItemTail(List * plist, Item * item);
 
+bool IsCycle(List * plist);
+
 #endif
