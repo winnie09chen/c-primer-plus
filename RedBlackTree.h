@@ -352,7 +352,7 @@ Node * FindBiggest(Node *n)
 }
 
 
-void DeleteTowNodes(Node *n)
+void DeleteTwoNodes(Node *n)
 {
     Node * p = NULL;
     Node * left_n = NULL;
@@ -377,10 +377,9 @@ void DeleteTowNodes(Node *n)
 void DeleteNode(Node * n)
 {
     Node * p = GetParent(n);
-    Node * left_n = NULL;
     if (n->left != NULL && n->right != NULL)
     {
-        DeleteTowNodes(n);
+        DeleteTwoNodes(n);
     }
     else if (n->left == NULL && n->right == NULL)
     {
@@ -396,5 +395,6 @@ void DeleteNode(Node * n)
         DeleteOneNode(n);
     }
 }
+
 
 #endif
