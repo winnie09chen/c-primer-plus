@@ -3,6 +3,7 @@
 
 #include <assert.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 enum color_t { BLACK, RED };
 
@@ -18,6 +19,8 @@ typedef struct node Node;
 
 
 void InsertRepairTree(Node * n);
+
+void DeleteCase1(Node * n);
 
 
 Node * GetParent(Node *n) {
@@ -188,6 +191,210 @@ void PrintTreeNode(Node * n, int level) {
 void PrintTree(Node * root)
 {
     PrintTreeNode(root, 0);
+}
+
+void DeleteCase6(Node * n)
+{
+    Node * s = GetSibling(n);
+    s->color = n->parent->color;
+    n->parent->color = BLACK;
+
+    if(n == n->parent->left)
+    {
+        s->right->color = BLACK;
+        RotateLeft(n->parent);
+    }
+    else
+    {
+        s->left->color = BLACK;
+        RotateRight(n->parent);
+    }
+} 
+
+void DeleteCase5(Node * n)
+{
+    Node * s = GetSibling(n);
+
+    if(s->color == BLACK)
+    {
+        if((n == n->parent->left) && (s->right->color == BLACK) && (s->left->color == RED))
+        {
+            s->color = RED;
+            s->left->color = BLACK;
+            RotateRight(s);
+        }
+        else if((n == n->parent->right) && (s->left->color == BLACK) && (s->right->color == RED))
+        {
+            s->color = RED;
+            s->right->color = BLACK;
+            RotateLeft(s);
+        }
+    }
+    DeleteCase6(n);
+}
+
+void DeleteCase4(Node * n)
+{
+    Node * s = GetSibling(n);
+    if((n->parent->color == RED) && (s->color == BLACK) && (s->left->color == BLACK) && (s->right->color == BLACK))
+    {
+        s->color = RED;
+        n->parent->color = BLACK;
+    }
+    else
+    {
+        DeleteCase5(n);
+    }
+}
+
+void DeleteCase3(Node * n)
+{
+    Node * s = GetSibling(n);
+    if((n->parent->color == BLACK) && (s->color == BLACK) && (s->left->color == BLACK) && (s->right->color == BLACK))
+    {
+        s->color = RED;
+        DeleteCase1(n->parent);
+    }
+    else
+    {
+        DeleteCase4(n);
+    }
+}
+
+void DeleteCase2(Node * n)
+{
+    Node * s = GetSibling(n);
+
+    if(s->color == RED)
+    {
+        n->parent->color = RED;
+        s->color = BLACK;
+        if(n == n->parent->left)
+        {
+            RotateLeft(n->parent);
+        }
+        else
+        {
+            RotateRight(n->parent);
+        }
+    }
+    DeleteCase3(n);
+}
+
+void DeleteCase1(Node * n)
+{
+    if(n->parent != NULL)
+    {
+        DeleteCase2(n);
+    }
+}
+
+void ReplaceNode(Node * n, Node * child)
+{
+    child->parent = n->parent;
+    if(n == n->parent->left)
+    {
+        n->parent->left = child;
+    }
+    else
+    {
+        n->parent->right = child;
+    }
+}
+
+Node * FindNode(Node * root, int key)
+{
+    if(root != NULL)
+    {
+        if(key < root->key)
+        {
+            return FindNode(root->left, key);
+        }
+        else if(key > root->key)
+        {
+            return FindNode(root->right, key);
+        }
+        else
+        {
+            return root;
+        }
+    }
+    return NULL;
+}
+
+void DeleteOneNode(Node * n)
+{
+    Node * child = (n->right == NULL) ? n->left : n->right;
+    assert(child);
+
+    ReplaceNode(n, child);
+    if(n->color == BLACK)
+    {
+        if(child->color == RED)
+        {
+            child->color = BLACK;
+        }
+        else
+        {
+            DeleteCase1(child);
+        }
+    }
+    free(n);
+}
+
+Node * FindBiggest(Node *n)
+{
+    if (n->right != NULL)
+    {
+        return FindBiggest(n->right);
+    }
+    return n;
+}
+
+
+void DeleteTowNodes(Node *n)
+{
+    Node * p = NULL;
+    Node * left_n = NULL;
+    left_n = FindBiggest(n->left);
+    if (GetParent(left_n)->left == left_n)
+    {
+        GetParent(left_n)->left = left_n->left;
+    }
+    else
+    {
+        GetParent(left_n)->right =left_n->left;
+    }
+    if (left_n->left != NULL)
+    {
+        left_n->left->parent =  GetParent(left_n);
+    }
+    n->key = left_n->key;
+    free(left_n);
+}
+
+
+void DeleteNode(Node * n)
+{
+    Node * p = GetParent(n);
+    Node * left_n = NULL;
+    if (n->left != NULL && n->right != NULL)
+    {
+        DeleteTowNodes(n);
+    }
+    else if (n->left == NULL && n->right == NULL)
+    {
+        if (p != NULL)
+        {
+            if (p->left == n) p->left = NULL;
+            if (p->right == n) p->right = NULL;
+        }
+        free(n);
+    }
+    else
+    {
+        DeleteOneNode(n);
+    }
 }
 
 #endif
