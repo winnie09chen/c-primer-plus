@@ -15,4 +15,6 @@ int find_a_peak(int first, int last, int array[]);
 
 void merge_sort(int array[], int length);
 
+void select_sort(int array[], int length);
+
 #endif
