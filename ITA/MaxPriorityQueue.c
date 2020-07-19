@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <limits.h>
 #include "MaxPriorityQueue.h"
 
 int Parent(int i)

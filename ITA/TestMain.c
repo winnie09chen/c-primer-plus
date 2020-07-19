@@ -7,10 +7,9 @@ void print_array(int array[], int size)
     {
         printf("%d\n", array[i]);
     }
-    
 }
 
-void main(void)
+int main(void)
 {
     int array[12] = {0};
     int size = -1;
@@ -21,4 +20,5 @@ void main(void)
     Insert(array, 30, size++);
     print_array(array, size + 1);
     getchar();
+    return 0;
 }
