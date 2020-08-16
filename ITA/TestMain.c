@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "MaxPriorityQueue.h"
+#include "DynamicProgramming.h"
 
 void print_array(int array[], int size)
 {
@@ -12,13 +12,10 @@ void print_array(int array[], int size)
 
 void main(void)
 {
-    int array[12] = {0};
-    int size = -1;
-    Insert(array, 17, size++);
-    Insert(array, 0, size++);
-    Insert(array, 10, size++);
-    Insert(array, 7, size++);
-    Insert(array, 30, size++);
-    print_array(array, size + 1);
+    int p[5] = {0, 3, 7, 3, 3};
+    int n = 5;
+    int q;
+    q = BottomUpCutRod(p, n);
+    printf("%d", q);
     getchar();
 }

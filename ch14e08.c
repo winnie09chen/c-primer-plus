@@ -4,10 +4,14 @@
 #define NAME_SIZE 20
 #define PLANE_SIZE 12
 
+void load(struct seat * airplane, int size);
+
+void save(struct seat * airplane, int size);
+
 struct seat
 {
     char code;          // A-Z 
-    short is_booked;    // 0 = not booked, 1 = booked
+    int is_booked;    // 0 = not booked, 1 = booked
     char *first_name;   // frist name of customer
     char *last_name;    // last name of customer
 };
@@ -24,10 +28,15 @@ int main(void)
         airplane[i].is_booked = 0;
         airplane[i].first_name = (char *)malloc(NAME_SIZE * sizeof(char));
         airplane[i].last_name = (char *)malloc(NAME_SIZE * sizeof(char));
+        airplane[i].first_name[0] = '-';
+        airplane[i].first_name[1] = '\0';
+        airplane[i].last_name[0] = '-';
+        airplane[i].last_name[1] = '\0';
         airplane[i].code = 'A' + i;
     }
 
-    
+    load(airplane, PLANE_SIZE);
+
     a: while(ch != 'f')
     {
         puts("To choose a function, enter its letter label:");
@@ -162,7 +171,43 @@ int main(void)
             }
         }
     }
+
+    save(airplane, PLANE_SIZE);
+
     getchar();
     getchar();
     return 0;
+}
+
+void load(struct seat * airplane, int size)
+{
+    FILE * ptr;
+    if((ptr = fopen("data.txt", "r")) == NULL)
+    {
+        fprintf(stderr, "Can't open the file, %s.\n", "date.txt");
+        return;
+    }
+
+    for(int i = 0; i < size; i++)
+    {
+        fscanf(ptr, "%c\t%d\t%s\t%s", &airplane[i].code, &airplane[i].is_booked, airplane[i].first_name, airplane[i].last_name);
+        getc(ptr);
+    }
+    fclose(ptr);
+}
+
+void save(struct seat * airplane, int size)
+{
+    FILE * ptr;
+    if((ptr = fopen("data.txt", "w")) == NULL)
+    {
+        fprintf(stderr, "Can't open the file, %s.\n", "date.txt");
+        return;
+    }
+
+    for(int i = 0; i < size; i++)
+    {
+        fprintf(ptr, "%c\t%d\t%s\t%s\n", airplane[i].code, airplane[i].is_booked, airplane[i].first_name, airplane[i].last_name);
+    }
+    fclose(ptr);
 }
