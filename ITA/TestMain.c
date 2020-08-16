@@ -7,10 +7,9 @@ void print_array(int array[], int size)
     {
         printf("%d\n", array[i]);
     }
-    
 }
 
-void main(void)
+int main(void)
 {
     int p[5] = {0, 3, 7, 3, 3};
     int n = 5;
@@ -18,4 +17,5 @@ void main(void)
     q = BottomUpCutRod(p, n);
     printf("%d", q);
     getchar();
+    return 0;
 }

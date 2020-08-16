@@ -2,6 +2,8 @@
 **/*.ilk
 **/*.pdb
 **/*.obj
+**/*.dSYM
 .vscode/c_cpp_properties.json
 .vscode/launch.json
 .vscode/tasks.json
+/ITA/TestMain

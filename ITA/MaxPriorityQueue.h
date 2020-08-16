@@ -1,5 +1,5 @@
 #ifndef MAX_PRIORITY_QUEUE_H__
-#define MAX_PRIORTITY_QUEUE_H__
+#define MAX_PRIORITY_QUEUE_H__
 
 void Insert(int array[], int x, int size);
 
